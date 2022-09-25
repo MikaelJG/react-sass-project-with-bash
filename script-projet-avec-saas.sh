@@ -29,15 +29,16 @@ echo '<link rel="stylesheet" href="/public/style.css">' > index.html
 # écrire <script src="main.js"></script> dans index.html
 echo '<script src="main.js"></script>' >> index.html
 
-# ecrire comment 
+# ecrire comment
 
-echo "$NOM_DU_PROJET was created by Julien Le Mee and Mikael Gonsalves on $DATE\n
+echo "This script was created by Julien Le Mee and Mikael Gonsalves "
+echo "$NOM_DU_PROJET was created on $DATE\n
 To Test\n\n
 Run command: ....\n\n
 For Demo\n\n
 Visit: **Link**\n\n
 Thank You!
-" > README.md 
+" > README.md
 
 # créer le dossier components
 mkdir components
