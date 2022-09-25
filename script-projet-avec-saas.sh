@@ -31,14 +31,14 @@ echo '<script src="main.js"></script>' >> index.html
 
 # ecrire comment
 
-echo "This script was created by Julien Le Mee and Mikael Gonsalves "
+echo "This script was created by Julien Le Mee and Mikael Gonsalves " > REAME.md
 echo "$NOM_DU_PROJET was created on $DATE\n
-To Test\n\n
-Run command: ....\n\n
-For Demo\n\n
-Visit: **Link**\n\n
+To Test
+Run command: ....
+For Demo
+Visit: **Link**
 Thank You!
-" > README.md
+" >> README.md
 
 # créer le dossier components
 mkdir components
