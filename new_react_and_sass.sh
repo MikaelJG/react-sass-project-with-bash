@@ -143,6 +143,14 @@ export default Footer;
 # créer le fichier _variables.scss dans le dossier components
 touch ./src/components/_variables.scss
 
+echo "
+// COLORS //
+
+$white: #ffffff;
+
+$black: #151515;
+" > ./src/components/_variables.scss
+
 echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
 
 # écrire @import './components/variables' dans le fichier _variables.scss
