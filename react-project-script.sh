@@ -64,7 +64,17 @@ touch ./src/index.css
 
 # change index.css in src
 
-../mod_index.sh $NOM_DU_PROJET
+# ../mod_index.sh $NOM_DU_PROJET
+
+echo "installing SASS"
+
+yarn add sass
+
+mv ./src/App.css ./src/App.scss
+
+sed -i "s/css/scss/" ./src/App.js
+
+echo "to use a component, add @use './shared.scss'; to App.js";
 
 # to run the app on http://localhost:3000
-# npm start
+npm start
