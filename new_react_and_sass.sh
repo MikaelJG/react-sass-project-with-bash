@@ -146,9 +146,9 @@ touch ./src/components/_variables.scss
 echo "
 // COLORS //
 
-$white: #ffffff;
+\$white: #ffffff;
 
-$black: #151515;
+\$black: #151515;
 " > ./src/components/_variables.scss
 
 echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
