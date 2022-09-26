@@ -104,6 +104,42 @@ function App() {
 export default App;
 " > ./src/App.js
 
+echo "
+function Content() {
+  return (
+      <div className='Content'>
+          <p> This is my Content</p>
+      </div>
+  )
+}
+
+export default Content;
+" > ./src/components/Content.js
+
+echo "
+function Navbar() {
+  return (
+      <div className='Navbar'>
+          <p> This is my Navbar</p>
+      </div>
+  )
+}
+
+export default Navbar;
+" > ./src/components/Navbar.js
+
+echo "
+function Footer() {
+  return (
+      <div className='Footer'>
+          <p> This is my Footer</p>
+      </div>
+  )
+}
+
+export default Footer;
+" > ./src/components/Footer.js
+
 # créer le fichier _variables.scss dans le dossier components
 touch ./src/components/_variables.scss
 
