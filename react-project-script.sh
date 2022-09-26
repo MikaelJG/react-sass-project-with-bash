@@ -76,5 +76,38 @@ sed -i "s/css/scss/" ./src/App.js
 
 echo "to use a component, add @use './shared.scss'; to App.js";
 
+# créer le dossier components
+
+echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
+
+mkdir components
+
+# créer les fichiers de components de bases
+touch ./components/Navbar.js ./components/Content.js ./components/Footer.js
+
+# link les components dans index.js
+echo "import Navbar from '../components/Navbar'
+import Content from '../components/Content'
+import Footer from '../components/Footer'
+import './App.scss'
+
+export default function App() {
+    return (
+        <div className='App'>
+            <Navbar />
+            <Content />
+            <Footer />
+        </div>
+    )
+}" >> ./src/App.js
+
+# créer le fichier _variables.scss dans le dossier components
+touch ./components/_variables.scss
+
+echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
+
+# écrire @import './components/variables' dans le fichier _variables.scss
+echo "@import './components/variables';" > ./src/App.scss
+
 # to run the app on http://localhost:3000
 npm start
