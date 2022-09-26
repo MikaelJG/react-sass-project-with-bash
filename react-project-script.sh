@@ -10,24 +10,23 @@ DIR=`pwd`
 
 cd "${DIR}/$NOM_DU_PROJET"
 
-while true; do
-    read -p "
-    ##############################
-    ##############################
-
-    Need framer-motion to animate?
-
-    ##############################
-    ##############################
-
-    >" yn
-        case $yn in
-                [Yy]* ) npm i framer-motion; break;;
-                [Nn]* ) break;;
-                * ) echo "Please answer yes or no.";;
-        esac
-done
-
+#while true; do
+#    read -p "
+#    ##############################
+#    ##############################
+#
+#    Need framer-motion to animate?
+#
+#    ##############################
+#    ##############################
+#
+#    >" yn
+#        case $yn in
+#                [Yy]* ) npm i framer-motion; break;;
+#                [Nn]* ) break;;
+#                * ) echo "Please answer yes or no.";;
+#        esac
+#done
 
 while true; do
     read -p "
