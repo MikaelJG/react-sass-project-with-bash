@@ -89,6 +89,7 @@ echo "
 import Navbar from './components/Navbar';
 import Content from './components/Content';
 import Footer from './components/Footer';
+import Button from '@mui/material/Button';
 import './App.scss';
 
 function App() {
@@ -97,12 +98,18 @@ function App() {
             <Navbar />
             <Content />
             <Footer />
+            <Button variant=\"contained\">Hello Julien!</Button>
         </div>
     )
 }
 
 export default App;
 " > ./src/App.js
+
+
+echo "------------------ INSTALLATION DE MATERIAL UI ------------------"
+
+npm install @mui/material @emotion/react @emotion/styled
 
 echo "
 function Content() {
