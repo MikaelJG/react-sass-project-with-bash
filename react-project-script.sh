@@ -80,18 +80,19 @@ echo "to use a component, add @use './shared.scss'; to App.js";
 
 echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
 
-mkdir components
+mkdir ./src/components
 
 # créer les fichiers de components de bases
-touch ./components/Navbar.js ./components/Content.js ./components/Footer.js
+touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
 
 # link les components dans index.js
-echo "import Navbar from '../components/Navbar'
-import Content from '../components/Content'
-import Footer from '../components/Footer'
-import './App.scss'
+echo "
+import Navbar from './components/Navbar';
+import Content from './components/Content';
+import Footer from './components/Footer';
+import './App.scss';
 
-export default function App() {
+function App() {
     return (
         <div className='App'>
             <Navbar />
@@ -99,15 +100,22 @@ export default function App() {
             <Footer />
         </div>
     )
-}" >> ./src/App.js
+}
+
+export default App;
+" > ./src/App.js
 
 # créer le fichier _variables.scss dans le dossier components
-touch ./components/_variables.scss
+touch ./src/components/_variables.scss
 
 echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
 
 # écrire @import './components/variables' dans le fichier _variables.scss
 echo "@import './components/variables';" > ./src/App.scss
+
+# ouvrir VS CODE
+
+code .
 
 # to run the app on http://localhost:3000
 npm start
