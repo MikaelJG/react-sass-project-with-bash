@@ -11,6 +11,12 @@ Autoriser l'éxécution du script :
   chmod +x ./NOM_DU_SCRIPT
 ```
 
+MacOS users should replace sed commands, by gsed commands and install gnu-sed.
+
+```bash
+ brew install gnu-sed
+ ```
+
 Lancer le script :
 
 ```bash
