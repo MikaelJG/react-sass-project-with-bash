@@ -5,7 +5,8 @@ for f in *; do
                 read -p "
 Would you like a $f component?" yn
                             case $yn in
-                                [Yy]* ) echo "in yes condition" ;;
+                                [Yy]* )
+                                    chmod +x $f.sh;;
                                 [Nn]* ) echo "in no condition" ;;
                                 * ) echo "in else condition";;
                             esac
