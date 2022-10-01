@@ -10,24 +10,6 @@ DIR=`pwd`
 
 cd "${DIR}/$NOM_DU_PROJET"
 
-#while true; do
-#    read -p "
-#    ##############################
-#    ##############################
-#
-#    Need framer-motion to animate?
-#
-#    ##############################
-#    ##############################
-#
-#    >" yn
-#        case $yn in
-#                [Yy]* ) npm i framer-motion; break;;
-#                [Nn]* ) break;;
-#                * ) echo "Please answer yes or no.";;
-#        esac
-#done
-
 while true; do
     read -p "
     ##############################
@@ -55,15 +37,9 @@ while true; do
 done
 
 
-# echo 'import { motion } from "framer-motion";' > ./src/App.js
-
 rm -f ./src/index.css
 
 touch ./src/index.css
-
-# change index.css in src
-
-# ../mod_index.sh $NOM_DU_PROJET
 
 echo "installing SASS"
 
@@ -82,6 +58,7 @@ echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
 mkdir ./src/components
 
 # créer les fichiers de components de bases
+
 touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
 
 # link les components dans index.js
@@ -98,7 +75,11 @@ function App() {
             <Navbar />
             <Content />
             <Footer />
-            <Button variant=\"contained\">Hello Julien!</Button>
+            <Button variant=\"contained\"
+                onClick={() => {
+                  alert('clicked');
+                }}
+              > Hello Julien!</Button>
         </div>
     )
 }
