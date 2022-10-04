@@ -3,6 +3,10 @@ import Navbar from './components/Navbar';
 import Content from './components/Content';
 import Footer from './components/Footer';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import './App.scss';
 
 function App() {
@@ -16,7 +20,18 @@ function App() {
                   alert('clicked');
                 }}
               > Hello Julien!</Button>
-        </div>
+                  <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    <Button>One</Button>
+                    <Button>Two</Button>
+                    <Button>Three</Button>
+                  </ButtonGroup>
+
+                  <FormGroup>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                    <FormControlLabel disabled control={<Checkbox />} label="Disabled" />
+                  </FormGroup>
+              </div>
+
     )
 }
 
