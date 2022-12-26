@@ -77,6 +77,19 @@ BONES_DEFAULT() {
 
     mkdir ./src/components
 
+    # créer les fichiers de components de bases
+    touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
+
+    # créer le fichier _variables.scss dans le dossier components
+    touch ./src/components/_variables.scss
+    
+    echo "
+    // COLORS //
+    
+    \$white: #ffffff;
+    
+    \$black: #151515;
+    " > ./src/components/_variables.scss
 
 }
 
@@ -135,23 +148,7 @@ if [ $# -eq 0 ];
 
     SASS_INSTALL
 
-    # créer le dossier components
     BONES_DEFAULT
-
-    # créer les fichiers de components de bases
-
-    touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
-
-    # créer le fichier _variables.scss dans le dossier components
-    touch ./src/components/_variables.scss
-    
-    echo "
-    // COLORS //
-    
-    \$white: #ffffff;
-    
-    \$black: #151515;
-    " > ./src/components/_variables.scss
 
     MATERIAL_UI_INSTALL
     
