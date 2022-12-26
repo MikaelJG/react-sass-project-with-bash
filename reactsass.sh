@@ -142,7 +142,7 @@ fi
 
 # ouvrir VS CODE
 
-code .
+# code .
 
 # to run the app on http://localhost:3000
-npm start
+# npm start
