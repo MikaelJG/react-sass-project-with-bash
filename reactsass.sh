@@ -41,25 +41,10 @@ SASS_INSTALL() {
 
 }
 
-read -p "Nom du projet : " NOM_DU_PROJET
+BONES_DEFAULT() {
 
-if [ $# -eq 0 ];
-    then
+    # link les components dans index.js
 
-
-    # créer le dossier components
-
-    echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
-
-    sleep 5
-
-    mkdir ./src/components
-
-    # créer les fichiers de components de bases
-
-    touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
-
-# link les components dans index.js
     echo "
     import Navbar from './components/Navbar';
     import Content from './components/Content';
@@ -84,11 +69,22 @@ if [ $# -eq 0 ];
     
     export default App;
     " > ./src/App.js
-    
+
+
+    echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
+
+    sleep 3 
+
+    mkdir ./src/components
+
+
+}
+
+MATERIAL_UI_INSTALL() {
     
     echo "------------------ INSTALLATION DE MATERIAL UI ------------------"
 
-    sleep 5
+    sleep 3 
     
     npm install @mui/material @emotion/react @emotion/styled
     
@@ -128,6 +124,24 @@ if [ $# -eq 0 ];
     export default Footer;
     " > ./src/components/Footer.js
     
+}
+
+read -p "Nom du projet : " NOM_DU_PROJET
+
+if [ $# -eq 0 ];
+    then
+
+    NPX_INSTALL
+
+    SASS_INSTALL
+
+    # créer le dossier components
+    BONES_DEFAULT
+
+    # créer les fichiers de components de bases
+
+    touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
+
     # créer le fichier _variables.scss dans le dossier components
     touch ./src/components/_variables.scss
     
@@ -138,8 +152,12 @@ if [ $# -eq 0 ];
     
     \$black: #151515;
     " > ./src/components/_variables.scss
+
+    MATERIAL_UI_INSTALL
     
     echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
+
+    sleep 3
     
     # écrire @import './components/variables' dans le fichier _variables.scss
     echo "@import './components/variables';" > ./src/App.scss
