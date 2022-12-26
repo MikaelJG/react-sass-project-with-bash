@@ -76,6 +76,8 @@ if [ $# -eq 0 ];
     
     
     echo "------------------ INSTALLATION DE MATERIAL UI ------------------"
+
+    sleep 5
     
     npm install @mui/material @emotion/react @emotion/styled
     
