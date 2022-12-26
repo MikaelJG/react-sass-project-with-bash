@@ -1,148 +1,144 @@
 #!/bin/bash
 
 DATE=$(date +%Y-%m-%d)
+DIR=$(pwd)
+COMPONENTS=( "alert" "avatar" "banner" "button" "btn" "card" "cardcategory" "cardcat" "cardproduct" "cardprod" "cardgrid" "cardtrip" "cards" "footer" "navbar" "nav" "bar" "notification" "notif" "searchform" "form" "tabs")
 
 read -p "Nom du projet : " NOM_DU_PROJET
 
-npx create-react-app $NOM_DU_PROJET
+if [ $# -eq 0 ];
+    then
 
-DIR=`pwd`
+    npx create-react-app $NOM_DU_PROJET
 
-cd "${DIR}/$NOM_DU_PROJET"
+    cd "${DIR}/$NOM_DU_PROJET"
 
-while true; do
-    read -p "
-    ##############################
-    ##############################
+    # change App.js
+    sed -i '/<header/,/<\/header>/d' ./src/App.js
 
-    Want the default landing page?
+    # change la page landing par default
+    sed -i '/className="App"/d' ./src/App.js
 
-    ##############################
-    ##############################
+    sed -i '/import/,/.css.;/d' ./src/App.js
 
-    >" yn
-        case $yn in
-            [Yy]* ) break;;
-            [Nn]* )
-            # change App.js
-            sed -i '/<header/,/<\/header>/d' ./src/App.js;
+    rm -f ./src/index.css
 
-            # change la page landing par default
-            sed -i '/className="App"/d' ./src/App.js;
+    touch ./src/index.css
 
-            sed -i '/import/,/.css.;/d' ./src/App.js; break;;
+    echo "installing SASS"
+    
+    # installing sass with yarn, not npm
+    yarn add sass
 
-            * ) echo "Please answer yes or no.";;
-        esac
-done
+    mv ./src/App.css ./src/App.scss
 
+    sed -i "s/css/scss/" ./src/App.js
 
-rm -f ./src/index.css
+    echo "to use a component, add @use './shared.scss'; to App.js";
 
-touch ./src/index.css
+    # créer le dossier components
 
-echo "installing SASS"
+    echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
 
-yarn add sass
+    sleep 5
 
-mv ./src/App.css ./src/App.scss
+    mkdir ./src/components
 
-sed -i "s/css/scss/" ./src/App.js
+    # créer les fichiers de components de bases
 
-echo "to use a component, add @use './shared.scss'; to App.js";
-
-# créer le dossier components
-
-echo "------------------ CREATION DU FICHIER VARIABLES.SCSS ------------------"
-
-mkdir ./src/components
-
-# créer les fichiers de components de bases
-
-touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
+    touch ./src/components/Navbar.js ./src/components/Content.js ./src/components/Footer.js
 
 # link les components dans index.js
-echo "
-import Navbar from './components/Navbar';
-import Content from './components/Content';
-import Footer from './components/Footer';
-import Button from '@mui/material/Button';
-import './App.scss';
+    echo "
+    import Navbar from './components/Navbar';
+    import Content from './components/Content';
+    import Footer from './components/Footer';
+    import Button from '@mui/material/Button';
+    import './App.scss';
+    
+    function App() {
+        return (
+            <div className='App'>
+                <Navbar />
+                <Content />
+                <Footer />
+                <Button variant=\"contained\"
+                    onClick={() => {
+                      alert('clicked');
+                    }}
+                  > Hello Julien!</Button>
+            </div>
+        )
+    }
+    
+    export default App;
+    " > ./src/App.js
+    
+    
+    echo "------------------ INSTALLATION DE MATERIAL UI ------------------"
+    
+    npm install @mui/material @emotion/react @emotion/styled
+    
+    echo "
+    function Content() {
+      return (
+          <div className='Content'>
+              <p> This is my Content</p>
+          </div>
+      )
+    }
+    
+    export default Content;
+    " > ./src/components/Content.js
+    
+    echo "
+    function Navbar() {
+      return (
+          <div className='Navbar'>
+              <p> This is my Navbar</p>
+          </div>
+      )
+    }
+    
+    export default Navbar;
+    " > ./src/components/Navbar.js
+    
+    echo "
+    function Footer() {
+      return (
+          <div className='Footer'>
+              <p> This is my Footer</p>
+          </div>
+      )
+    }
+    
+    export default Footer;
+    " > ./src/components/Footer.js
+    
+    # créer le fichier _variables.scss dans le dossier components
+    touch ./src/components/_variables.scss
+    
+    echo "
+    // COLORS //
+    
+    \$white: #ffffff;
+    
+    \$black: #151515;
+    " > ./src/components/_variables.scss
+    
+    echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
+    
+    # écrire @import './components/variables' dans le fichier _variables.scss
+    echo "@import './components/variables';" > ./src/App.scss
 
-function App() {
-    return (
-        <div className='App'>
-            <Navbar />
-            <Content />
-            <Footer />
-            <Button variant=\"contained\"
-                onClick={() => {
-                  alert('clicked');
-                }}
-              > Hello Julien!</Button>
-        </div>
-    )
-}
+elif [ $# -eq 1 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] ;
+    then
+        echo "in elif";
 
-export default App;
-" > ./src/App.js
+else
+    echo "Something went wrong"
 
-
-echo "------------------ INSTALLATION DE MATERIAL UI ------------------"
-
-npm install @mui/material @emotion/react @emotion/styled
-
-echo "
-function Content() {
-  return (
-      <div className='Content'>
-          <p> This is my Content</p>
-      </div>
-  )
-}
-
-export default Content;
-" > ./src/components/Content.js
-
-echo "
-function Navbar() {
-  return (
-      <div className='Navbar'>
-          <p> This is my Navbar</p>
-      </div>
-  )
-}
-
-export default Navbar;
-" > ./src/components/Navbar.js
-
-echo "
-function Footer() {
-  return (
-      <div className='Footer'>
-          <p> This is my Footer</p>
-      </div>
-  )
-}
-
-export default Footer;
-" > ./src/components/Footer.js
-
-# créer le fichier _variables.scss dans le dossier components
-touch ./src/components/_variables.scss
-
-echo "
-// COLORS //
-
-\$white: #ffffff;
-
-\$black: #151515;
-" > ./src/components/_variables.scss
-
-echo "------------------ IMPORTATION DU FICHIER VARIABLES.SCSS ------------------"
-
-# écrire @import './components/variables' dans le fichier _variables.scss
-echo "@import './components/variables';" > ./src/App.scss
+fi
 
 # ouvrir VS CODE
 
