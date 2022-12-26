@@ -137,6 +137,16 @@ elif [ $# -eq 1 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] ;
     then
         echo "in elif";
 
+# know number of args
+# --------------------
+# take all args and create an array. 
+# loop through args_arrays
+# for every in args arrays, check if in components array.
+# if in components array, 
+# create app with component
+#
+# else echo " $arg is not a component " 
+
 else
     echo "Something went wrong"
 
