@@ -4,10 +4,7 @@ DATE=$(date +%Y-%m-%d)
 DIR=$(pwd)
 COMPONENTS=( "alert" "avatar" "banner" "button" "btn" "card" "cardcategory" "cardcat" "cardproduct" "cardprod" "cardgrid" "cardtrip" "cards" "footer" "navbar" "nav" "bar" "notification" "notif" "searchform" "form" "tabs")
 
-read -p "Nom du projet : " NOM_DU_PROJET
-
-if [ $# -eq 0 ];
-    then
+NPX_INSTALL() {
 
     npx create-react-app $NOM_DU_PROJET
 
@@ -25,7 +22,13 @@ if [ $# -eq 0 ];
 
     touch ./src/index.css
 
+}
+
+SASS_INSTALL() {
+
     echo "installing SASS"
+
+    sleep 3
     
     # installing sass with yarn, not npm
     yarn add sass
@@ -35,6 +38,14 @@ if [ $# -eq 0 ];
     sed -i "s/css/scss/" ./src/App.js
 
     echo "to use a component, add @use './shared.scss'; to App.js";
+
+}
+
+read -p "Nom du projet : " NOM_DU_PROJET
+
+if [ $# -eq 0 ];
+    then
+
 
     # créer le dossier components
 
