@@ -37,7 +37,7 @@ SASS_INSTALL() {
 
     sed -i "s/css/scss/" ./src/App.js
 
-    echo "to use a component, add @use './shared.scss'; to App.js";
+    echo "to use a component, add @use './shared.scss'; to App.js"
 
 }
 
