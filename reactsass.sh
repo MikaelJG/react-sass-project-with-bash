@@ -4,6 +4,29 @@ DATE=$(date +%Y-%m-%d)
 DIR=$(pwd)
 COMPONENTS=( "alert" "avatar" "banner" "button" "btn" "card" "cardcategory" "cardcat" "cardproduct" "cardprod" "cardgrid" "cardtrip" "cards" "footer" "navbar" "nav" "bar" "notification" "notif" "searchform" "form" "tabs")
 ARG_ARRAY=( "$@" )
+MATCHING_ARRAY=()
+
+ARGS_IN_COMPONENTS() {
+    for i in "${ARG_ARRAY[@]}";
+        do
+            if [[ " ${COMPONENTS[*]} " =~ " $i " ]];
+                then
+                # is inside arg array, append matching array
+                MATCHING_ARRAY+=($i)
+            fi
+    done
+
+    if [[ ${#MATCHING_ARRAY[@]} -eq ${#ARG_ARRAY[@]} ]];
+        then
+        echo "all components, returning true"
+        return 0
+        # returns true
+    else
+        echo "not all components, returning false"
+        return 1 
+        # return false
+    fi
+}
 
 NPX_INSTALL() {
     npx create-react-app $NOM_DU_PROJET
@@ -123,20 +146,11 @@ MATERIAL_UI_INSTALL() {
 FOR_WANTED() {
     for i in "${ARG_ARRAY[@]}";
         do
-            echo "in for arg array, $i is in too"
+            SCRIPT="~/code/myman/reactman/components_script/${i}.sh"
+            echo "script is: $SCRIPT"
 
-            # header should always be first in the array
-            # footer should always be last in the array
+            # execute script
 
-            # case if footer, last in array.
-            # case if header, first in array.
-
-            # for every in array, 
-            # case statement
-
-            # is this nice to have ???
-
-            # we can give the order !!! 
     done
 }
 
@@ -155,43 +169,43 @@ if [ $# -eq 0 ];
     # écrire @import './components/variables' dans le fichier _variables.scss
     echo "@import './components/variables';" > ./src/App.scss
 
-elif [ $# -eq 1 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] ;
+elif [ $# -eq 1 ] && ARGS_IN_COMPONENTS $1;
     then
         echo "in elif 1 arg";
 
 
-elif [ $# -eq 2 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] ;
+elif [ $# -eq 2 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 2 args";
         FOR_WANTED
 
-elif [ $# -eq 3 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] && [[ " ${COMPONENTS[*]} " =~ " $3 " ]] ;
+elif [ $# -eq 3 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 3 args";
         FOR_WANTED
 
-elif [ $# -eq 4 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] && [[ " ${COMPONENTS[*]} " =~ " $3 " ]] && [[ " ${COMPONENTS[*]} " =~ " $4 " ]] ;
+elif [ $# -eq 4 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 4 args";
         FOR_WANTED
 
-elif [ $# -eq 5 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] && [[ " ${COMPONENTS[*]} " =~ " $3 " ]] && [[ " ${COMPONENTS[*]} " =~ " $4 " ]] && [[ " ${COMPONENTS[*]} " =~ " $5 " ]] ;
+elif [ $# -eq 5 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 5 args";
         FOR_WANTED
         
 
-elif [ $# -eq 6 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] && [[ " ${COMPONENTS[*]} " =~ " $3 " ]] && [[ " ${COMPONENTS[*]} " =~ " $4 " ]] && [[ " ${COMPONENTS[*]} " =~ " $5 " ]]  && [[ " ${COMPONENTS[*]} " =~ " $6 " ]] ;
+elif [ $# -eq 6 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 6 args";
         FOR_WANTED
 
-elif [ $# -eq 7 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] && [[ " ${COMPONENTS[*]} " =~ " $3 " ]] && [[ " ${COMPONENTS[*]} " =~ " $4 " ]] && [[ " ${COMPONENTS[*]} " =~ " $5 " ]] && [[ " ${COMPONENTS[*]} " =~ " $6 " ]] && [[ " ${COMPONENTS[*]} " =~ " $7 " ]];
+elif [ $# -eq 7 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 7 args";
         FOR_WANTED
 
-elif [ $# -eq 8 ] && [[ " ${COMPONENTS[*]} " =~ " $1 " ]] && [[ " ${COMPONENTS[*]} " =~ " $2 " ]] && [[ " ${COMPONENTS[*]} " =~ " $3 " ]] && [[ " ${COMPONENTS[*]} " =~ " $4 " ]] && [[ " ${COMPONENTS[*]} " =~ " $5 " ]] && [[ " ${COMPONENTS[*]} " =~ " $6 " ]] && [[ " ${COMPONENTS[*]} " =~ " $7 " ]] && [[ " ${COMPONENTS[*]} " =~ " $8 " ]] ;
+elif [ $# -eq 8 ] && ARGS_IN_COMPONENTS $1 ;
     then
         echo "in elif 8 args";
         FOR_WANTED
