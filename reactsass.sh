@@ -105,6 +105,8 @@ MATERIAL_UI_INSTALL() {
     echo "------------------ INSTALLATION DE MATERIAL UI ------------------"
     sleep 3 
     npm install @mui/material @emotion/react @emotion/styled
+
+    mkdir ./src/components
     
     echo "
     function Content() {
@@ -146,12 +148,49 @@ MATERIAL_UI_INSTALL() {
 FOR_WANTED() {
     for i in "${ARG_ARRAY[@]}";
         do
-            SCRIPT="~/code/myman/reactman/components_script/${i}.sh"
-            echo "script is: $SCRIPT"
-
-            # execute script
-
+            # run the script
+            ~/code/myman/reactman/components_script/${i}.sh
+            
     done
+}
+
+CREATE_APP_JS() {
+    mkdir src
+    cd src
+    mkdir components
+    cd ..
+    # create the file (middle)
+    echo "
+        import './App.scss';
+        
+        function App() {
+            return (
+                <div className='App'>
+
+    " > ./src/components/App.js
+
+    for i in "${ARG_ARRAY[@]}";
+        do
+
+        # i must be first char upcase
+        I=`echo "${i^}"`
+
+        echo "import ${I} from './components/${I}';" | cat - ./src/components/App.js > temp && mv temp ./src/components/App.js 
+
+        echo "
+                <${I} />
+        " >> ./src/components/App.js
+    done
+
+    # finish the file (end)
+    echo "
+            </div>
+        )
+    }
+    
+    export default App;
+    " >> ./src/components/App.js
+
 }
 
 read -p "Nom du projet : " NOM_DU_PROJET
@@ -171,44 +210,61 @@ if [ $# -eq 0 ];
 
 elif [ $# -eq 1 ] && ARGS_IN_COMPONENTS $1;
     then
-        echo "in elif 1 arg";
-
+        NPX_INSTALL
+        SASS_INSTALL
+        BONES_DEFAULT
+        MATERIAL_UI_INSTALL
+        FOR_WANTED
 
 elif [ $# -eq 2 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 2 args";
-        FOR_WANTED
+        CREATE_APP_JS
+       # NPX_INSTALL
+       # SASS_INSTALL
+       # MATERIAL_UI_INSTALL
+       # FOR_WANTED
 
 elif [ $# -eq 3 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 3 args";
+        NPX_INSTALL
+        SASS_INSTALL
         FOR_WANTED
+        MATERIAL_UI_INSTALL
 
 elif [ $# -eq 4 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 4 args";
+        NPX_INSTALL
+        SASS_INSTALL
         FOR_WANTED
+        MATERIAL_UI_INSTALL
 
 elif [ $# -eq 5 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 5 args";
+        NPX_INSTALL
+        SASS_INSTALL
         FOR_WANTED
-        
+        MATERIAL_UI_INSTALL
 
 elif [ $# -eq 6 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 6 args";
+        NPX_INSTALL
+        SASS_INSTALL
         FOR_WANTED
+        MATERIAL_UI_INSTALL
 
 elif [ $# -eq 7 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 7 args";
+        NPX_INSTALL
+        SASS_INSTALL
         FOR_WANTED
+        MATERIAL_UI_INSTALL
 
 elif [ $# -eq 8 ] && ARGS_IN_COMPONENTS $1 ;
     then
-        echo "in elif 8 args";
+        NPX_INSTALL
+        SASS_INSTALL
         FOR_WANTED
+        MATERIAL_UI_INSTALL
 
 else
     echo "Something went wrong"
@@ -217,7 +273,7 @@ fi
 
 # ouvrir VS CODE
 
-# code .
+code .
 
 # to run the app on http://localhost:3000
-# npm start
+npm start
